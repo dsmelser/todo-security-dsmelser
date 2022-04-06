@@ -56,19 +56,24 @@ Postconditions: what must be true after the user story ends.
     * [x] jjwt-jackson
     * [x] mysql-connector-java
     * [x] spring-boot-starter-jdbc
+  * [x] Create base package (todo)
   * [ ] Create models package
-    * [ ] Create AppUser class
-      * [ ] Extend from the User (org.springframework.security.core.userdetails)
-      * [ ] Add Set&lt;String&gt; roles field variable
-      * [ ] Add int userId field variable
-      * [ ] Generate getters/setters
-      * [ ] Generate hashCode/equals
-    * [ ] Create Todo class
-      * [ ] Create String text field variable
-      * [ ] Create int userId field variable
-      * [ ] Create boolean isPublic field variable
-      * [ ] Create LocalDate createDate field variable
-      * [ ] Generate getters/setters
-      * [ ] Generate hashCode/equals
+    * [x] Create AppUser class
+      * [x] Extend from the User (org.springframework.security.core.userdetails)
+      * [x] Add Set&lt;String&gt; roles field variable
+      * [x] Add Integer userId field variable
+      * [x] Generate getters/setters
+      * [x] Generate hashCode/equals
+      * [ ] Add constructor which takes Integer userId, String username, String password, and Set&lt;String&gt; roles
+        * [ ] call super(username, password, roles.stream().map( r -> new SimpleGrantedAuthority( "ROLE_" + r ).collect( Collectors.toList() ) )
+        * [ ] assign to this.userId
+        * [ ] assign to this.roles
+    * [x] Create Todo class
+      * [x] Create String text field variable
+      * [x] Create Integer userId field variable
+      * [x] Create Boolean isPublic field variable
+      * [x] Create LocalDate createDate field variable
+      * [x] Generate getters/setters
+      * [x] Generate hashCode/equals
 * [ ] Create mysql schemas (test/prod)
 * [ ] Create React Front-End
