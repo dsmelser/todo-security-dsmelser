@@ -116,18 +116,34 @@ Postconditions: what must be true after the user story ends.
       * [x] @EnableWebSecurity
       * [x] extends WebSecurityConfigurerAdapter
       * [x] @Override protected void configure( HttpSecurity http) throws Exception
-        * [ ] http.csrf.disable()
-        * [ ] http.cors()
-        * [ ] http.authorizeRequests()
-          * [ ] .antMatchers("/**").denyAll()
-          * [ ] .and()
-          * [ ] .sessionManagement()
-            * [ ] .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        * [x] http.csrf().disable()
+        * [x] http.cors()
+        * [x] http.authorizeRequests()
+          * [x] .antMatchers("/**").denyAll()
+          * [x] .and()
+          * [x] .sessionManagement()
+            * [x] .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
       * [x] public PasswordEncoder getEncoder(){ return new BCryptPasswordEncoder(); }
         * [x] mark with @Bean
       * [x] @Override protected AuthenticationManager authenticationManager() throws Exception
         * [x] just return super.authenticationManager();
         * [x] mark with @Bean
+    * [ ] Create JwtConverter class
+      * [ ] Mark as @Component
+      * [ ] add a Key field variable (secretKey) assign Keys.secretKeyFor(SignatureAlgorithm.HS256)
+      * [ ] add public String getTokenFromUser( User toConvert )
+        * [ ] for now, throw new UnsupportedOperationException()
+      * [ ] add public User getUserFromToken( String token )
+        * [ ] for now, throw new UnsupportedOperationException()
+  * [ ] Create controllers package
+    * [ ] Add AuthController class
+      * [ ] mark as @RestController
+      * [ ] add AuthenticationManager field variable
+      * [ ] add JwtConverter field variable
+      * [ ] add UserService field variable
+      * [ ] add a constructor that takes in all field variables and sets them
+      * [ ] add ResponseEntity&lt;String&gt; login( @RequestBody Map&lt;String,String&gt; credentials )
+        * [ ] for now, throw new UnsupportedOperationException();
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
