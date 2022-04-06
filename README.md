@@ -98,19 +98,30 @@ Postconditions: what must be true after the user story ends.
         * [x] generate functions automatically
   * [ ] Create domain package
     * [ ] Create UserService class
-      * [ ] mark with @Service
-      * [ ] extends UserDetailService
-      * [ ] add UserRepo field variable
-      * [ ] add PasswordEncoder field variable
-      * [ ] add constructor which takes in a UserRepo & PasswordEncoder
-      * [ ] @Override loadUserByUsername (can return AppUser as a UserDetails object)
-        * [ ] use the repo to pass along the user
-        * [ ] add //TODO: validate (later we'll check to make sure username isn't null/empty/etc)
-        * [ ] if user is not found (we get a null) throw new UsernameNotFoundException(username + " not found")
-        * [ ] otherwise, return the user
-      * [ ] add AppUser create( String username, String password )
-        * [ ] for now just return null
+      * [x] mark with @Service
+      * [x] implements UserDetailsService
+      * [x] add UserRepo field variable
+      * [x] add PasswordEncoder field variable
+      * [x] add constructor which takes in a UserRepo & PasswordEncoder
+      * [x] @Override loadUserByUsername (can return AppUser as a UserDetails object)
+        * [x] use the repo to pass along the user
+        * [x] add //TODO: validate (later we'll check to make sure username isn't null/empty/etc)
+        * [x] if user is not found (we get a null) throw new UsernameNotFoundException(username + " not found")
+        * [x] otherwise, return the user
+      * [x] add AppUser create( String username, String password )
+        * [x] for now just return null
     * [ ] Create TodoService class
+  * [ ] Create security package
+    * [ ] create SecurityConfig class
+      * [ ] @EnableWebSecurity
+      * [ ] extends WebSecurityConfigurerAdapter
+      * [ ] @Override protected void configure( HttpSecurity http) throws Exception
+        * [ ] leave blank for now
+      * [ ] public PasswordEncoder getEncoder(){ return new BCryptPasswordEncoder(); }
+        * [ ] mark with @Bean
+      * [ ] @Override protected AuthenticationManager authenticationManager() throws Exception
+        * [ ] just return super.authenticationManager();
+        * [ ] mark with @Bean
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
