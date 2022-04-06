@@ -76,26 +76,41 @@ Postconditions: what must be true after the user story ends.
       * [x] Generate getters/setters
       * [x] Generate hashCode/equals
   * [ ] Create data package
-    * [ ] Create TodoRepo interface
-      * [ ] List&lt;Todo&gt; findAllPublic()
-      * [ ] List&lt;Todo&gt; findByUserId(Integer userId)
-      * [ ] Todo findById( Integer todoId )
-      * [ ] Todo add(Todo toAdd)
-      * [ ] boolean remove(Integer todoId)
-      * [ ] void edit( Todo updated )
-    * [ ] Create UserRepo interface
-      * [ ] AppUser findByUsername( String username )
-      * [ ] AppUser add( AppUser toAdd )
-      * [ ] boolean remove( Integer userId )
-      * [ ] void edit( User updated )
-    * [ ] Create TodoDbRepo class
-      * [ ] Add @Repository
-      * [ ] implements TodoRepo
-        * [ ] generate functions automatically
-    * [ ] Create UserDbRepo class
-      * [ ] Add @Repository
-      * [ ] implements UserRepo
-        * [ ] generate functions automatically
+    * [x] Create TodoRepo interface
+      * [x] List&lt;Todo&gt; findAllPublic()
+      * [x] List&lt;Todo&gt; findByUserId(Integer userId)
+      * [x] Todo findById( Integer todoId )
+      * [x] Todo add(Todo toAdd)
+      * [x] boolean remove(Integer todoId)
+      * [x] void edit( Todo updated )
+    * [x] Create UserRepo interface
+      * [x] AppUser findByUsername( String username )
+      * [x] AppUser add( AppUser toAdd )
+      * [x] boolean remove( Integer userId )
+      * [x] void edit( User updated )
+    * [x] Create TodoDbRepo class
+      * [x] Add @Repository
+      * [x] implements TodoRepo
+        * [x] generate functions automatically
+    * [x] Create UserDbRepo class
+      * [x] Add @Repository
+      * [x] implements UserRepo
+        * [x] generate functions automatically
+  * [ ] Create domain package
+    * [ ] Create UserService class
+      * [ ] mark with @Service
+      * [ ] extends UserDetailService
+      * [ ] add UserRepo field variable
+      * [ ] add PasswordEncoder field variable
+      * [ ] add constructor which takes in a UserRepo & PasswordEncoder
+      * [ ] @Override loadUserByUsername (can return AppUser as a UserDetails object)
+        * [ ] use the repo to pass along the user
+        * [ ] add //TODO: validate (later we'll check to make sure username isn't null/empty/etc)
+        * [ ] if user is not found (we get a null) throw new UsernameNotFoundException(username + " not found")
+        * [ ] otherwise, return the user
+      * [ ] add AppUser create( String username, String password )
+        * [ ] for now just return null
+    * [ ] Create TodoService class
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
