@@ -57,17 +57,17 @@ Postconditions: what must be true after the user story ends.
     * [x] mysql-connector-java
     * [x] spring-boot-starter-jdbc
   * [x] Create base package (todo)
-  * [ ] Create models package
+  * [x] Create models package
     * [x] Create AppUser class
       * [x] Extend from the User (org.springframework.security.core.userdetails)
       * [x] Add Set&lt;String&gt; roles field variable
       * [x] Add Integer userId field variable
       * [x] Generate getters/setters
       * [x] Generate hashCode/equals
-      * [ ] Add constructor which takes Integer userId, String username, String password, and Set&lt;String&gt; roles
-        * [ ] call super(username, password, roles.stream().map( r -> new SimpleGrantedAuthority( "ROLE_" + r ).collect( Collectors.toList() ) )
-        * [ ] assign to this.userId
-        * [ ] assign to this.roles
+      * [x] Add constructor which takes Integer userId, String username, String password, and Set&lt;String&gt; roles
+        * [x] call super(username, password, roles.stream().map( r -> new SimpleGrantedAuthority( "ROLE_" + r )).collect( Collectors.toList() ) )
+        * [x] assign to this.userId
+        * [x] assign to this.roles
     * [x] Create Todo class
       * [x] Create String text field variable
       * [x] Create Integer userId field variable
@@ -76,4 +76,30 @@ Postconditions: what must be true after the user story ends.
       * [x] Generate getters/setters
       * [x] Generate hashCode/equals
 * [ ] Create mysql schemas (test/prod)
+  * [ ] create sql folder in project folder
+  * [ ] create todo-test.sql
+  * [ ] create todo-prod.sql
+  * [ ] drop database if exists todo-X
+  * [ ] create database todo-X
+  * [ ] use todo-X
+  * [ ] create table users
+    * [ ] userId        int primary key auto_increment
+    * [ ] username      varchar(300) not null unique
+    * [ ] password      varchar(2048) not null,
+  * [ ] create table todos
+    * [ ] todoId        int primary key auto_increment
+    * [ ] todoText      text not null
+    * [ ] authorId      int not null
+    * [ ] isPublic      bit(1) not null
+    * [ ] createDate    date not null
+    * [ ] constraint fk_todos_users foreign key (authorId) references users(userId)
+  * [ ] create table roles
+    * [ ] roleId        int primay key auto_increment
+    * [ ] roleName      varchar(20) not null unique
+  * [ ] create table userroles
+    * [ ] userId        int not null,
+    * [ ] roleId        int not null,
+    * [ ] constraint pk_userroles (userId, roleId),
+    * [ ] constraint fk_users_userroles foreign key (userId) references users(userId)
+    * [ ] constraint fk_roles_userroles foreign key (roleId) references roles(roleId)
 * [ ] Create React Front-End
