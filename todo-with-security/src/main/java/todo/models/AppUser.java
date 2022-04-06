@@ -1,13 +1,26 @@
 package todo.models;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AppUser extends User {
 
     Set<String> roles;
     Integer userId;
+
+    public AppUser( Integer userId, String username, String password, Set<String> roles ){
+        super( username, password,
+                roles.stream().map(
+                        r -> new SimpleGrantedAuthority("ROLE_" + r)).collect(Collectors.toList()));
+
+        this.roles = roles;
+        this.userId = userId;
+    }
+
+
 
     public Set<String> getRoles() {
         return roles;

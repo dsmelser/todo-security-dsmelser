@@ -76,30 +76,32 @@ Postconditions: what must be true after the user story ends.
       * [x] Generate getters/setters
       * [x] Generate hashCode/equals
 * [ ] Create mysql schemas (test/prod)
-  * [ ] create sql folder in project folder
-  * [ ] create todo-test.sql
-  * [ ] create todo-prod.sql
-  * [ ] drop database if exists todo-X
-  * [ ] create database todo-X
-  * [ ] use todo-X
-  * [ ] create table users
-    * [ ] userId        int primary key auto_increment
-    * [ ] username      varchar(300) not null unique
-    * [ ] password      varchar(2048) not null,
-  * [ ] create table todos
-    * [ ] todoId        int primary key auto_increment
-    * [ ] todoText      text not null
-    * [ ] authorId      int not null
-    * [ ] isPublic      bit(1) not null
-    * [ ] createDate    date not null
-    * [ ] constraint fk_todos_users foreign key (authorId) references users(userId)
-  * [ ] create table roles
-    * [ ] roleId        int primay key auto_increment
-    * [ ] roleName      varchar(20) not null unique
-  * [ ] create table userroles
-    * [ ] userId        int not null,
-    * [ ] roleId        int not null,
-    * [ ] constraint pk_userroles (userId, roleId),
-    * [ ] constraint fk_users_userroles foreign key (userId) references users(userId)
-    * [ ] constraint fk_roles_userroles foreign key (roleId) references roles(roleId)
+  * [x] create sql folder in project folder
+  * [x] create todo-test.sql
+  * [x] create todo-prod.sql
+  * [x] drop database if exists todo_X
+  * [x] create database todo_X
+  * [x] use todo_X
+  * [x] create table users
+    * [x] userId        int primary key auto_increment
+    * [x] username      varchar(300) not null unique
+    * [x] password      varchar(2048) not null,
+  * [x] create table todos
+    * [x] todoId        int primary key auto_increment
+    * [x] todoText      text not null
+    * [x] authorId      int not null
+    * [x] isPublic      bit(1) not null
+    * [x] createDate    date not null
+    * [x] constraint fk_todos_users foreign key (authorId) references users(userId)
+  * [x] create table roles
+    * [x] roleId        int primay key auto_increment
+    * [x] roleName      varchar(20) not null unique
+  * [x] create table userroles
+    * [x] userId        int not null,
+    * [x] roleId        int not null,
+    * [x] constraint pk_userroles (userId, roleId),
+    * [x] constraint fk_users_userroles foreign key (userId) references users(userId)
+    * [x] constraint fk_roles_userroles foreign key (roleId) references roles(roleId)
+  * [ ] insert into users (username, password) values ('bob', '$2a$12$HqaU3VlN09ufZ60R8VrLHuIX8H6b1iFDA9AG./vzThpIzhxEIF8nC');
+  * [ ] insert into users (username, password) values ('june', '$2a$12$k2TB.cQ1TLHLOYn.pbbiTuQ5HoUxozWkl.ZgFZ.9eioAeMxndT5AS');
 * [ ] Create React Front-End
