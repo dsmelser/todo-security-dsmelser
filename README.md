@@ -113,15 +113,21 @@ Postconditions: what must be true after the user story ends.
     * [ ] Create TodoService class
   * [ ] Create security package
     * [ ] create SecurityConfig class
-      * [ ] @EnableWebSecurity
-      * [ ] extends WebSecurityConfigurerAdapter
-      * [ ] @Override protected void configure( HttpSecurity http) throws Exception
-        * [ ] leave blank for now
-      * [ ] public PasswordEncoder getEncoder(){ return new BCryptPasswordEncoder(); }
-        * [ ] mark with @Bean
-      * [ ] @Override protected AuthenticationManager authenticationManager() throws Exception
-        * [ ] just return super.authenticationManager();
-        * [ ] mark with @Bean
+      * [x] @EnableWebSecurity
+      * [x] extends WebSecurityConfigurerAdapter
+      * [x] @Override protected void configure( HttpSecurity http) throws Exception
+        * [ ] http.csrf.disable()
+        * [ ] http.cors()
+        * [ ] http.authorizeRequests()
+          * [ ] .antMatchers("/**").denyAll()
+          * [ ] .and()
+          * [ ] .sessionManagement()
+            * [ ] .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+      * [x] public PasswordEncoder getEncoder(){ return new BCryptPasswordEncoder(); }
+        * [x] mark with @Bean
+      * [x] @Override protected AuthenticationManager authenticationManager() throws Exception
+        * [x] just return super.authenticationManager();
+        * [x] mark with @Bean
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
