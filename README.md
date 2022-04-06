@@ -128,22 +128,35 @@ Postconditions: what must be true after the user story ends.
       * [x] @Override protected AuthenticationManager authenticationManager() throws Exception
         * [x] just return super.authenticationManager();
         * [x] mark with @Bean
-    * [ ] Create JwtConverter class
-      * [ ] Mark as @Component
-      * [ ] add a Key field variable (secretKey) assign Keys.secretKeyFor(SignatureAlgorithm.HS256)
-      * [ ] add public String getTokenFromUser( User toConvert )
+    * [x] Create JwtConverter class
+      * [x] Mark as @Component
+      * [x] add a Key field variable (secretKey) assign Keys.secretKeyFor(SignatureAlgorithm.HS256)
+      * [x] add public String getTokenFromUser( User toConvert )
         * [ ] for now, throw new UnsupportedOperationException()
-      * [ ] add public User getUserFromToken( String token )
+      * [x] add public User getUserFromToken( String token )
         * [ ] for now, throw new UnsupportedOperationException()
+    * [ ] Create JwtRequestFilter class
+      * [ ] extends BasicAuthenticationFilter
+      * [ ] Add a JwtConverter field
+      * [ ] Add a constructor that takes in a JwtConvert and AuthenticationManager
+        * [ ] super( authManager )
+        * [ ] store the JwtConverter in the field variable
+      * [ ] @Override protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+        * [ ] for now, throw new UnsupportedOperationException()
+      * [ ] IN SecurityConfig.java
+        * [ ] create an @Autowired JwtRequestFilter field variable (reqFilter)
+        * [ ] right after the .and() call .addFilter(reqFilter)
   * [ ] Create controllers package
     * [ ] Add AuthController class
-      * [ ] mark as @RestController
-      * [ ] add AuthenticationManager field variable
-      * [ ] add JwtConverter field variable
-      * [ ] add UserService field variable
-      * [ ] add a constructor that takes in all field variables and sets them
-      * [ ] add ResponseEntity&lt;String&gt; login( @RequestBody Map&lt;String,String&gt; credentials )
-        * [ ] for now, throw new UnsupportedOperationException();
+      * [x] mark as @RestController
+      * [ ] add @RequestMapping( "/api/security" )
+      * [x] add AuthenticationManager field variable
+      * [x] add JwtConverter field variable
+      * [x] add UserService field variable
+      * [x] add a constructor that takes in all field variables and sets them
+      * [x] add ResponseEntity&lt;String&gt; login( @RequestBody Map&lt;String,String&gt; credentials )
+        * [ ] mark as @PostRequest("/login")
+        * [x] for now, throw new UnsupportedOperationException();
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
