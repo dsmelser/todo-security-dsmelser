@@ -75,6 +75,27 @@ Postconditions: what must be true after the user story ends.
       * [x] Create LocalDate createDate field variable
       * [x] Generate getters/setters
       * [x] Generate hashCode/equals
+  * [ ] Create data package
+    * [ ] Create TodoRepo interface
+      * [ ] List&lt;Todo&gt; findAllPublic()
+      * [ ] List&lt;Todo&gt; findByUserId(Integer userId)
+      * [ ] Todo findById( Integer todoId )
+      * [ ] Todo add(Todo toAdd)
+      * [ ] boolean remove(Integer todoId)
+      * [ ] void edit( Todo updated )
+    * [ ] Create UserRepo interface
+      * [ ] AppUser findByUsername( String username )
+      * [ ] AppUser add( AppUser toAdd )
+      * [ ] boolean remove( Integer userId )
+      * [ ] void edit( User updated )
+    * [ ] Create TodoDbRepo class
+      * [ ] Add @Repository
+      * [ ] implements TodoRepo
+        * [ ] generate functions automatically
+    * [ ] Create UserDbRepo class
+      * [ ] Add @Repository
+      * [ ] implements UserRepo
+        * [ ] generate functions automatically
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
@@ -102,18 +123,19 @@ Postconditions: what must be true after the user story ends.
     * [x] constraint pk_userroles (userId, roleId),
     * [x] constraint fk_users_userroles foreign key (userId) references users(userId)
     * [x] constraint fk_roles_userroles foreign key (roleId) references roles(roleId)
-  * [ ] insert into users (username, password) values ('bob', '$2a$12$HqaU3VlN09ufZ60R8VrLHuIX8H6b1iFDA9AG./vzThpIzhxEIF8nC');   -- pw is password
-  * [ ] insert into users (username, password) values ('june', '$2a$12$k2TB.cQ1TLHLOYn.pbbiTuQ5HoUxozWkl.ZgFZ.9eioAeMxndT5AS');  -- pw is admin-password
-  * [ ] insert into roles (roleName) VALUES ('AUTHOR'), ('ADMIN');
-  * [ ] insert into userroles (userId, roleId) VALUES (1,1), (2,2);
-  * [ ] insert into todos (todoText, authorId, isPublic, createDate) values ('this is a private todo', 1, 0, '2020-04-06'), ('this is a public todo', 2, 1, '2020-04-05');
-  * [ ] generate reset stored procedure in db (set_known_good_state)
-    * [ ] delete from userroles;
-    * [ ] delete from users;
-    * [ ] alter table users set auto_increment = 1;
-    * [ ] delete from roles;
-    * [ ] alter table user set auto_increment = 1;
-    * [ ] delete from todos;
-    * [ ] alter table todos set auto_increment = 1;
-    * [ ] (copy all inserts from prod)
+  * [x] insert into users (username, password) values ('bob', '$2a$12$HqaU3VlN09ufZ60R8VrLHuIX8H6b1iFDA9AG./vzThpIzhxEIF8nC');   -- pw is password
+  * [x] insert into users (username, password) values ('june', '$2a$12$k2TB.cQ1TLHLOYn.pbbiTuQ5HoUxozWkl.ZgFZ.9eioAeMxndT5AS');  -- pw is admin-password
+  * [x] insert into roles (roleName) VALUES ('AUTHOR'), ('ADMIN');
+  * [x] insert into userroles (userId, roleId) VALUES (1,1), (2,2);
+  * [x] insert into todos (todoText, authorId, isPublic, createDate) values ('this is a private todo', 1, 0, '2020-04-06'), ('this is a public todo', 2, 1, '2020-04-05');
+  * [x] generate reset stored procedure in db (set_known_good_state)
+    * [x] delete from userroles;
+    * [x] delete from users;
+    * [x] alter table users auto_increment = 1;
+    * [x] delete from roles;
+    * [x] alter table roles auto_increment = 1;
+    * [x] delete from todos;
+    * [x] alter table todos auto_increment = 1;
+    * [x] (copy all inserts from prod)
+  * [x] at end of test schema call set_known_good_state();
 * [ ] Create React Front-End
