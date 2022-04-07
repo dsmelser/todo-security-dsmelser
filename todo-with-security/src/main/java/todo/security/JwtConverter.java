@@ -17,6 +17,8 @@ public class JwtConverter {
     }
 
     public String getTokenFromUser( User toConvert ){
+
+        toConvert.get
         throw new UnsupportedOperationException();
     }
 
