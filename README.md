@@ -141,7 +141,8 @@ Postconditions: what must be true after the user story ends.
         * [x] http.csrf().disable()
         * [x] http.cors()
         * [x] http.authorizeRequests()
-          * [ ] .antMatchers( HttpMethod.POST, "/api/security/login").permitAll()
+          * [x] .antMatchers( HttpMethod.POST, "/api/security/login").permitAll()
+          * [ ] .antMatchers( HttpMethod.GET, "/api/todo/public" ).permitAll()
           * [x] .antMatchers("/**").denyAll()
           * [x] .and()
           * [x] .sessionManagement()
@@ -155,14 +156,14 @@ Postconditions: what must be true after the user story ends.
       * [x] Mark as @Component
       * [x] add a Key field variable (secretKey) assign Keys.secretKeyFor(SignatureAlgorithm.HS256)
       * [x] add public String getTokenFromUser( User toConvert )
-        * [ ] generate comma separated string of authorities granted to the user (retrieve those with .getAuthorities() )
-        * [ ] return Jwts.builder()
-          * [ ] .setIssuer("todo-app")
-          * [ ] .setSubject(toConvert.getUsername())
-          * [ ] .claim("authorties", commaSeparatedString)
-          * [ ] .setExpiration( new Date(System.currentTimeMillis() + 15 * 60 * 1000 ) )
-          * [ ] .signWithKey( secretKey )
-          * [ ] .build();
+        * [x] generate comma separated string of authorities granted to the user (retrieve those with .getAuthorities() )
+        * [x] return Jwts.builder()
+          * [x] .setIssuer("todo-app")
+          * [x] .setSubject(toConvert.getUsername())
+          * [x] .claim("authorties", commaSeparatedString)
+          * [x] .setExpiration( new Date(System.currentTimeMillis() + 15 * 60 * 1000 ) )
+          * [x] .signWithKey( secretKey )
+          * [x] .compact();
       * [x] add public User getUserFromToken( String token )
         * [ ] for now, throw new UnsupportedOperationException()
     * [ ] Create JwtRequestFilter class
@@ -184,18 +185,28 @@ Postconditions: what must be true after the user story ends.
       * [x] add JwtConverter field variable
       * [x] add UserService field variable
       * [x] add a constructor that takes in all field variables and sets them
-      * [ ] add ResponseEntity login( @RequestBody Map&lt;String,String&gt; credentials )
+      * [x] add ResponseEntity login( @RequestBody Map&lt;String,String&gt; credentials )
         * [x] mark as @PostMapping("/login")
-        * [ ] create UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken( credentials.get("username"), credentials.get("password") );
-        * [ ] in a try/catch( AuthenticationException ex) block...
-          * [ ] Authentication authResult = authManager.authenticate( token );
-          * [ ] if( authResult.isAuthenticated() ){
-            * [ ] String jwt = converter.getTokenFromUser( (User)authResult.getPrincipal());
-            * [ ] return ResponseEnttiy.ok( jwt );
-          * [ ] }
-          * [ ] catch( AuthenticationException ex ){
-            * [ ] ex.printStackTrace( System.err ); }
-          * [ ] return new ResponseEntity( HttpStatus.FORBIDDEN );
+        * [x] create UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken( credentials.get("username"), credentials.get("password") );
+        * [x] in a try/catch( AuthenticationException ex) block...
+          * [x] Authentication authResult = authManager.authenticate( token );
+          * [x] if( authResult.isAuthenticated() ){
+            * [x] String jwt = converter.getTokenFromUser( (User)authResult.getPrincipal());
+            * [x] Map&lt;String,String&gt; tokenWrapper = new HashMap<>();
+            * [x] tokenWrapper.put( "jwt_token", jwt);
+            * [x] return ResponseEntity.ok( tokenWrapper );
+          * [x] }
+          * [x] catch( AuthenticationException ex ){
+            * [x] ex.printStackTrace( System.err ); }
+          * [x] return new ResponseEntity( HttpStatus.FORBIDDEN );
+    * [ ] Add TodoController class
+      * [ ] mark as @RestController
+      * [ ] @RequestMapping( "/api/todo" )
+      * [ ] add @Autowired TodoService field variable (service)
+      * [ ] add a GET endpoint ("/public") for retrieving all todos
+        * [ ] List&lt;Todo&gt; pubTodos = service.getPublicTodos() (doesn't exist yet...)
+        * [ ] generate TodoService.getPublicTodos()
+        * [ ] return ResponseEntity.ok(pubTodos);
   
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder

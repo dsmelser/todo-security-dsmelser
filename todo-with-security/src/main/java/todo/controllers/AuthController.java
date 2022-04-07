@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import todo.domain.UserService;
 import todo.security.JwtConverter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -34,18 +35,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Map<String,String> credentials ){
-
-//        * [ ] create UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken( credentials.get("username"), credentials.get("password") );
-//        * [ ] in a try/catch( AuthenticationException ex) block...
-//          * [ ] Authentication authResult = authManager.authenticate( token );
-//          * [ ] if( authResult.isAuthenticated() ){
-//            * [ ] String jwt = converter.getTokenFromUser( (User)authResult.getPrincipal());
-//            * [ ] return ResponseEnttiy.ok( jwt );
-//          * [ ] }
-//          * [ ] catch( AuthenticationException ex ){
-//            * [ ] ex.printStackTrace( System.err ); }
-//          * [ ] return new ResponseEntity( HttpStatus.FORBIDDEN );
+    public ResponseEntity login(@RequestBody Map<String,String> credentials ){
 
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken( credentials.get("username"), credentials.get("password") );
@@ -58,7 +48,10 @@ public class AuthController {
 
                 String jwt = converter.getTokenFromUser( toConvert );
 
-                return ResponseEntity.ok( jwt );
+                Map<String, String> tokenWrapper = new HashMap<>();
+                tokenWrapper.put("jwt_token", jwt);
+
+                return ResponseEntity.ok( tokenWrapper );
             }
         } catch ( AuthenticationException ex ){
             ex.printStackTrace(System.err);
