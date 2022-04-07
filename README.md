@@ -56,7 +56,12 @@ Postconditions: what must be true after the user story ends.
     * [x] jjwt-jackson
     * [x] mysql-connector-java
     * [x] spring-boot-starter-jdbc
+    * [x] spring-boot-starter-web
   * [x] Create base package (todo)
+    * [ ] Create App class
+      * [ ] @SpringBootApplication
+      * [ ] main
+        * [ ] SpringApplication.run( App.class, args );
   * [x] Create models package
     * [x] Create AppUser class
       * [x] Extend from the User (org.springframework.security.core.userdetails)
@@ -136,16 +141,16 @@ Postconditions: what must be true after the user story ends.
       * [x] add public User getUserFromToken( String token )
         * [ ] for now, throw new UnsupportedOperationException()
     * [ ] Create JwtRequestFilter class
-      * [ ] extends BasicAuthenticationFilter
-      * [ ] Add a JwtConverter field
-      * [ ] Add a constructor that takes in a JwtConvert and AuthenticationManager
-        * [ ] super( authManager )
-        * [ ] store the JwtConverter in the field variable
-      * [ ] @Override protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+      * [x] extends BasicAuthenticationFilter
+      * [x] Add a JwtConverter field
+      * [x] Add a constructor that takes in a JwtConvert and AuthenticationManager
+        * [x] super( authManager )
+        * [x] store the JwtConverter in the field variable
+      * [x] @Override protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain)
         * [ ] for now, throw new UnsupportedOperationException()
-      * [ ] IN SecurityConfig.java
-        * [ ] create an @Autowired JwtRequestFilter field variable (reqFilter)
-        * [ ] right after the .and() call .addFilter(reqFilter)
+      * [x] IN SecurityConfig.java
+        * [x] add @Autowired JwtConverter field variable
+        * [x] right after the .and() call .addFilter( new JwtReqestFilter() )
   * [ ] Create controllers package
     * [ ] Add AuthController class
       * [x] mark as @RestController
@@ -155,8 +160,9 @@ Postconditions: what must be true after the user story ends.
       * [x] add UserService field variable
       * [x] add a constructor that takes in all field variables and sets them
       * [x] add ResponseEntity&lt;String&gt; login( @RequestBody Map&lt;String,String&gt; credentials )
-        * [ ] mark as @PostRequest("/login")
+        * [x] mark as @PostMapping("/login")
         * [x] for now, throw new UnsupportedOperationException();
+  
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
