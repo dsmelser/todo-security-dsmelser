@@ -4,8 +4,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class JwtRequestFilter extends BasicAuthenticationFilter {
 
@@ -20,9 +22,9 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(
             HttpServletRequest request,
             HttpServletResponse response,
-            FilterChain chain){
+            FilterChain chain) throws ServletException, IOException {
 
-        throw new UnsupportedOperationException();
+        chain.doFilter(request, response);
 
     }
 

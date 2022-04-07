@@ -58,10 +58,14 @@ Postconditions: what must be true after the user story ends.
     * [x] spring-boot-starter-jdbc
     * [x] spring-boot-starter-web
   * [x] Create base package (todo)
-    * [ ] Create App class
-      * [ ] @SpringBootApplication
-      * [ ] main
-        * [ ] SpringApplication.run( App.class, args );
+    * [x] Create App class
+      * [x] @SpringBootApplication
+      * [x] main
+        * [x] SpringApplication.run( App.class, args );
+  * [x] Create application.properties file
+    * [x] spring.datasource.url=jdbc:mysql://localhost:3306/todo_prod
+    * [x] spring.datasource.username=root
+    * [x] spring.datasource.password=top-secret-password
   * [x] Create models package
     * [x] Create AppUser class
       * [x] Extend from the User (org.springframework.security.core.userdetails)
@@ -124,6 +128,7 @@ Postconditions: what must be true after the user story ends.
         * [x] http.csrf().disable()
         * [x] http.cors()
         * [x] http.authorizeRequests()
+          * [ ] .antMatchers( HttpMethod.POST, "/api/security/login").permitAll()
           * [x] .antMatchers("/**").denyAll()
           * [x] .and()
           * [x] .sessionManagement()
@@ -147,21 +152,30 @@ Postconditions: what must be true after the user story ends.
         * [x] super( authManager )
         * [x] store the JwtConverter in the field variable
       * [x] @Override protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-        * [ ] for now, throw new UnsupportedOperationException()
+        * [ ] for now, chain.doFilter( request, response );
       * [x] IN SecurityConfig.java
         * [x] add @Autowired JwtConverter field variable
         * [x] right after the .and() call .addFilter( new JwtReqestFilter() )
   * [ ] Create controllers package
     * [ ] Add AuthController class
       * [x] mark as @RestController
-      * [ ] add @RequestMapping( "/api/security" )
+      * [x] add @RequestMapping( "/api/security" )
       * [x] add AuthenticationManager field variable
       * [x] add JwtConverter field variable
       * [x] add UserService field variable
       * [x] add a constructor that takes in all field variables and sets them
-      * [x] add ResponseEntity&lt;String&gt; login( @RequestBody Map&lt;String,String&gt; credentials )
+      * [ ] add ResponseEntity login( @RequestBody Map&lt;String,String&gt; credentials )
         * [x] mark as @PostMapping("/login")
-        * [x] for now, throw new UnsupportedOperationException();
+        * [x] create UserNameAuthenticationToken token = new UserNameAuthenticationToken( credentials.get("username"), credentials.get("password") );
+        * [ ] in a try/catch( AuthenticationException ex) block...
+          * [ ] Authentication authResult = authManager.authenticate( token );
+          * [ ] if( authResult.isAuthenticated() ){
+            * [ ] String jwt = converter.getTokenFromUser( (User)authResult.getPrincipal());
+            * [ ] return ResponseEnttiy.ok( jwt );
+          * [ ] }
+          * [ ] catch( AuthenticationException ex ){
+            * [ ] ex.printStackTrace( System.err ); }
+          * [ ] return new ResponseEntity( HttpStatus.FORBIDDEN );
   
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
