@@ -101,10 +101,23 @@ Postconditions: what must be true after the user story ends.
       * [x] Add @Repository
       * [x] implements TodoRepo
         * [x] generate functions automatically
+    * [ ] Create UserMapper class
+      * [ ] create Set&lt;String&gt; roles field variable
+      * [ ] create UserMapper constructor which takes in the Set of roles and sets the field variable
+      * [ ] implements RowMapper&lt;AppUser&gt;
+      * [ ] auto-generate methods
+        * [ ] AppUser toBuild = new AppUser(userId, username, password, roles);
     * [x] Create UserDbRepo class
       * [x] Add @Repository
       * [x] implements UserRepo
+        * [ ] Add @Autowired JdbcTemplate template field variable
         * [x] generate functions automatically
+        * [ ] create private Set&lt;String&gt; findRolesByUsername(String username)
+          * [ ] String sql = "SELECT roleName FROM users u inner join userroles ur on ur.userId = u.userId inner join roles r on ur.roleId = r.roleId where username = ?"
+          * [ ] return template.query( sql, (rowData, rowNum)->rowData.getString("roleName"), username).stream().collect(Collectors.toSet())
+        * [ ] implement findByUsername(String username)
+          * [ ] String sql = "select userId, username, password from users where username = ?"
+          * [ ] return template.query( sql, new UserMapper(findRolesByUsername())).stream().findAny().orElse(null);
   * [ ] Create domain package
     * [ ] Create UserService class
       * [x] mark with @Service
@@ -166,7 +179,7 @@ Postconditions: what must be true after the user story ends.
       * [x] add a constructor that takes in all field variables and sets them
       * [ ] add ResponseEntity login( @RequestBody Map&lt;String,String&gt; credentials )
         * [x] mark as @PostMapping("/login")
-        * [x] create UserNameAuthenticationToken token = new UserNameAuthenticationToken( credentials.get("username"), credentials.get("password") );
+        * [ ] create UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken( credentials.get("username"), credentials.get("password") );
         * [ ] in a try/catch( AuthenticationException ex) block...
           * [ ] Authentication authResult = authManager.authenticate( token );
           * [ ] if( authResult.isAuthenticated() ){
