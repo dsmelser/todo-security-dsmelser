@@ -1,5 +1,7 @@
 package todo.data;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import todo.models.Todo;
 
@@ -7,9 +9,14 @@ import java.util.List;
 
 @Repository
 public class TodoDbRepo implements TodoRepo {
+    @Autowired
+    JdbcTemplate template;
+
     @Override
     public List<Todo> findAllPublic() {
-        throw new UnsupportedOperationException();
+        String sql = "SELECT * FROM todos where isPublic = 1;";
+
+        return template.query(sql, new TodoMapper());
     }
 
     @Override

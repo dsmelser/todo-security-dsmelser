@@ -98,24 +98,24 @@ Postconditions: what must be true after the user story ends.
       * [x] AppUser add( AppUser toAdd )
       * [x] boolean remove( Integer userId )
       * [x] void edit( User updated )
-    * [ ] Create TodoMapper class
-      * [ ] implements RowMapper&lt;Todo&gt;
-      * [ ] Generate interface method
-        * [ ] Todo toReturn = new Todo();
-        * [ ] toReturn.setTodoId( rs.getInt("todoId") );
-        * [ ] toReturn.setText( rs.getString("todoText"));
-        * [ ] toReturn.setUserId( rs.getInt("authorId") );
-        * [ ] toReturn.setPublic( rs.getBoolean("isPublic"));
-        * [ ] toReturn.setCreateDate( LocalDate.parse( rs.getString("createDate") ) );
-        * [ ] return toReturn;
+    * [x] Create TodoMapper class
+      * [x] implements RowMapper&lt;Todo&gt;
+      * [x] Generate interface method
+        * [x] Todo toReturn = new Todo();
+        * [x] toReturn.setTodoId( rs.getInt("todoId") );
+        * [x] toReturn.setText( rs.getString("todoText"));
+        * [x] toReturn.setUserId( rs.getInt("authorId") );
+        * [x] toReturn.setPublic( rs.getBoolean("isPublic"));
+        * [x] toReturn.setCreateDate( LocalDate.parse( rs.getString("createDate") ) );
+        * [x] return toReturn;
     * [x] Create TodoDbRepo class
       * [x] Add @Repository
       * [ ] add @Autowired JdbcTemplate template field variable
       * [x] implements TodoRepo
         * [x] generate functions automatically
-        * [ ] implement findAllPublic()
-          * [ ] String sql = "SELECT * FROM todos where isPublic = 1;"
-          * [ ] return template.query( sql, new TodoMapper());
+        * [x] implement findAllPublic()
+          * [x] String sql = "SELECT * FROM todos where isPublic = 1;"
+          * [x] return template.query( sql, new TodoMapper());
     * [x] Create UserMapper class
       * [x] create Set&lt;String&gt; roles field variable
       * [x] create UserMapper constructor which takes in the Set of roles and sets the field variable
@@ -184,7 +184,18 @@ Postconditions: what must be true after the user story ends.
           * [x] .signWithKey( secretKey )
           * [x] .compact();
       * [x] add public User getUserFromToken( String token )
-        * [ ] for now, throw new UnsupportedOperationException()
+        * [ ] try/catch (JwtException)
+          * [ ] JwtParser parser = Jwts.parseBuilder().requireIssuer("todo-app").setSigningKey( secretKey ).build();
+          * [ ] Jws&lt;Claim&gt; claims = parser.parseClaimsJws( token.substring(7) );
+          * [ ] String username = claims.getBody().getSubject();
+          * [ ] String authorities = (String)claims.getBody().get("authorities");
+          * [ ] String [] authSplit = authorities.split(",");
+          * [ ] List&lt;GrantedAuthorities&gt; grantedAuthorities = new ArrayList<>();
+          * [ ] for( String auth : authSplit ){ grantedAuthorities.add(new GrantedAuthorty(auth)) }
+          * [ ] return new User( username, username, grantedAuthorities );
+          * [ ] catch( JwtException ex ) {
+            * [ ] ex.printStackTrace( System.err );
+            * [ ] return null; }
     * [ ] Create JwtRequestFilter class
       * [x] extends BasicAuthenticationFilter
       * [x] Add a JwtConverter field
@@ -192,7 +203,15 @@ Postconditions: what must be true after the user story ends.
         * [x] super( authManager )
         * [x] store the JwtConverter in the field variable
       * [x] @Override protected void doFilterInternal( HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-        * [ ] for now, chain.doFilter( request, response );
+        * [ ] String authHeader = request.getHeader( "Authorization ");
+        * [ ] if( authHeader != null && authHeader.startsWith( "Bearer ")){
+          * [ ] User converted = converter.getUserFromToken( authHeader );
+          * [ ] if( converted != null ){
+            * [ ] UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken( converted.getUsername(), null, convertedUser.getAuthorities() );
+            * [ ] SecurityContextHolder.getContext().setAuthentication( token );
+          * [ ] } else {
+            * [ ] response.setStatus( 403 ); }
+        * [ ] chain.doFilter( request, response );
       * [x] IN SecurityConfig.java
         * [x] add @Autowired JwtConverter field variable
         * [x] right after the .and() call .addFilter( new JwtReqestFilter() )
@@ -226,7 +245,11 @@ Postconditions: what must be true after the user story ends.
         * [x] List&lt;Todo&gt; pubTodos = service.getPublicTodos() (doesn't exist yet...)
         * [x] generate TodoService.getPublicTodos()
         * [x] return ResponseEntity.ok(pubTodos);
-  
+      * [ ] add a DELETE endpoint ("/{todoId}")
+        * [ ] public ResponseEntity delete( @PathVariable Integer todoId, Principal user ){
+          * [ ] service.deleteById( todoId, user );
+          * [ ] generate TodoService.deleteById()
+          * [ ] return ResponseEntity.ok();
 * [ ] Create mysql schemas (test/prod)
   * [x] create sql folder in project folder
   * [x] create todo-test.sql
