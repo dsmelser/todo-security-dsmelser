@@ -6,3 +6,8 @@ Content-Type: application/json
     "password":"password"
 }
 
+#####################################################
+
+DELETE http://localhost:8080/api/todo/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0b2RvLWFwcCIsInN1YiI6ImJvYiIsImF1dGhvcml0aWVzIjoiUk9MRV9BVVRIT1IiLCJleHAiOjE2NDkzNjYwODF9.1ngOphsNbTDpRNVbccdDe6s9k0pS4pgvZn6LsUXNLh8
+

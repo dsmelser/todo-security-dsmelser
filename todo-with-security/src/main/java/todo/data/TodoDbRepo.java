@@ -26,7 +26,7 @@ public class TodoDbRepo implements TodoRepo {
 
     @Override
     public Todo findById(Integer todoId) {
-        throw new UnsupportedOperationException();
+        return template.query("select * from todos where todoId = ?", new TodoMapper(), todoId).stream().findAny().orElse(null);
     }
 
     @Override

@@ -1,6 +1,11 @@
 package todo.security;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -23,6 +28,25 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain chain) throws ServletException, IOException {
+
+        String authHeader = request.getHeader("Authorization");
+        if( authHeader != null && authHeader.startsWith("Bearer ")){
+            User converted = converter.getUserFromToken( authHeader );
+
+            if( converted != null ){
+                UsernamePasswordAuthenticationToken token =
+                        new UsernamePasswordAuthenticationToken(
+                                converted.getUsername(),
+                                null,
+                                converted.getAuthorities()
+                        );
+
+                SecurityContextHolder.getContext().setAuthentication(token);
+            } else {
+                //response.setStatus(HttpStatus.FORBIDDEN.value());
+                response.setStatus(403);
+            }
+        }
 
         chain.doFilter(request, response);
 
