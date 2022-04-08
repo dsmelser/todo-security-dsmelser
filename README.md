@@ -339,12 +339,42 @@
         * [x] Lines 5
   * [x] Add additional dependencies
     * [x] `npm i react-router-dom `
-  * [ ] Create components
-    * [ ] Nav Component
-    * [ ] Login Component
-    * [ ] Home Component - welcoming and showing all pub todos
-      * [ ] Welcome Component - nested inside Home
-      * [ ] Todos (container) Component
-        * [ ] Todo Component
-        * [ ] Delete Component
-    * [ ] AddTodo Component
+  * [x] Create components (indents below indicate parent-child relations)
+    * [x] Nav Component
+    * [x] Login Component
+    * [x] Home Component - welcoming and showing all pub todos
+      * [x] Welcome Component - nested inside Home
+      * [x] Todos (container) Component
+        * [x] Todo Component
+        * [x] Delete Component
+    * [x] AddTodo Component
+  * [x] Add react-router to our project
+    * [x] At the top of index.js
+      * [x] `import { BrowserRouter } from 'react-router-dom';`
+      * [x] Change `<React.StrictMode>` to `<BrowserRouter>`
+      * [x] Change `</React.StrictMode>` to `</BrowserRouter>`
+  * [x] Build out base Home component
+    * [x] Functional component, don't forget to export!
+  * [x] Build out base Welcome component
+    * [x] Functional component, don't forget to export!
+  * [x] Add `<Home />` to App.js
+    * [x] `import Home from "./Home";`
+    * [x] Add flavor-text to ground ourselves
+  * [x] Add `<Welcome />` to Home.js
+    * [x] `import Welcome from "./Welcome";`
+    * [x] Add flavor-text to ground ourselves
+  * [x] Add `<Nav />` to App.js
+    * [x] `import Nav from "./Nav";`
+    * [x] Add flavor-text to ground ourselves
+  * [x] Begin implementing Routes in App.js
+    * [x] `import { Routes, Route } from 'react-router-dom';`
+    * [x] `<Routes>`
+      * [x] `<Route path="/" element={<Home />} />`
+      * [x] `// ^^ Home Page Route, at base dot-com URL`
+    * [x] `</Routes>`
+  * [ ] Begin implementing Links in Nav.js
+    * [ ] `import { Link } from 'react-router-dom';`
+    * [ ] `<Link to="/">Home</Link>`
+    
+ 
+  
