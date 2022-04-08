@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Todo from './Todo'
 
 function Todos() {
     const [pubTodos, setPubTodos] = useState([]);
@@ -15,7 +16,16 @@ function Todos() {
         .then(todosData => setPubTodos(todosData))
         .catch(rejection => alert("Failure: " + rejection.status + ": " + rejection.statusText));
     }, []);
-    return <p>This is the Todos container component!</p>
+
+    function todoFactory() {
+        return pubTodos.map(todo => <Todo todoObj={todo} />);
+    }
+
+    return (
+        <>
+            {todoFactory()}
+        </>
+    )
 }
 
 export default Todos;

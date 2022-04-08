@@ -378,24 +378,37 @@
   * [x] Add `<Todos />` component to Home.js
     * [x] `import Todos from "./Todos";`
   * [ ] In Todos.js...
-    * [ ] Create State to store public todos
-      * [ ] `import { useState } from 'react';`
-        * [ ] `const [pubTodos, setPubTodos] = useState([]);`
-    * [ ] Implement `useEffect()` hook for setting state on fetch
-      * [ ] `import { useState, useEffect } from 'react';`
-      * [ ] `useEffect(() => {`
-        * [ ] Use Fetch API to retrieve our public todos
-          * [ ] Verify CORS is open in your TodoController (Java)
-            * [ ] `@CrossOrigin(origins = {"http://localhost:3000"})`
-          * [ ] `fetch("http://localhost:8080/api/todo/public")`
-          * [ ] `.then(response => {`
-              * [ ] `if (response.status === 200) {`
-                * [ ] `return response.json() `
-              * [ ] `} else {`
-                * [ ] `alert("Something went wrong when fetching")`
-              * [ ] `}`
-          * [ ] `})`
-          * [ ] `.then(todosData => setPubTodos(todosData))`
-          * [ ] `.catch(rejection => alert("Failure: " + rejection.status))`
-      * [ ] `}, [])`
+    * [x] Create State to store public todos
+      * [x] `import { useState } from 'react';`
+        * [x] `const [pubTodos, setPubTodos] = useState([]);`
+    * [x] Implement `useEffect()` hook for setting state on fetch
+      * [x] `import { useState, useEffect } from 'react';`
+      * [x] `useEffect(() => {`
+        * [x] Use Fetch API to retrieve our public todos
+          * [x] Verify CORS is open in your TodoController (Java)
+            * [x] `@CrossOrigin(origins = {"http://localhost:3000"})`
+          * [x] `fetch("http://localhost:8080/api/todo/public")`
+          * [x] `.then(response => {`
+              * [x] `if (response.status === 200) {`
+                * [x] `return response.json() `
+              * [x] `} else {`
+                * [x] `alert("Something went wrong when fetching")`
+              * [x] `}`
+          * [x] `})`
+          * [x] `.then(todosData => setPubTodos(todosData))`
+          * [x] `.catch(rejection => alert("Failure: " + rejection.status))`
+      * [x] `}, [])`
+    * [ ] `import Todo from './Todo'`
+    * [ ] Implement a `<Todo />` factory function
+      * [ ] `function todoFactory() {`
+        * [ ] `return pubTodos.map(todo => <Todo todoObj={todo} />);` 
+      * [ ] `}`
+      * [ ] Call function inside of the return for `<Todos />`
+        * [ ] `return (`
+          * [ ] `<>`
+            * [ ] `{todoFactory()}`
+          * [ ] `</>`
+        * [ ] `)`
+    * [ ] Build out the base `<Todo />` component
+      * [ ] Functional component, don't forget to export
   
