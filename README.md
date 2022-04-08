@@ -45,7 +45,7 @@
 
 
 ## Tasks
-
+* [x] Shift+Alt+F is awesome in VSCode
 * [ ] Create Java API
   * [x] Create Java Project (todo-with-security)
   * [x] Modify pom.xml to include the parent tag (spring-boot-starter-parent)
@@ -440,46 +440,53 @@
         * [x] `<AuthContext.Provider value={[user, setUser]}>`
           * [x] `(everything else you already had here)`
         * [x] `</AuthContext.Provider>`
-  * [ ] Build out Login component
-    * [ ] In terminal: `npm i jwt-decode`
-    * [ ] `import { useState, useContext } from "react";`
-    * [ ] `import { useNavigate } from "react-router-dom";`
-    * [ ] `import jwtDecode from "jwt-decode";`
-    * [ ] `import AuthContext from "./AuthContext";`
-    * [ ] const [username, setUsername] = useState("");
-    * [ ] const [password, setPassword] = useState("");
-    * [ ] const [user, setUser] = useContext(AuthContext);
-    * [ ] const navigate = useNavigate();
-    * [ ] Build out a form for logging in
-      * [ ] `<form onSubmit={submitHandler}>`
-        * [ ] `<label>Username:</label><br />`
-        * [ ] `<input onChange={event => setUsername(event.target.value)}></input><br /><br />`
-        * [ ] `<label>Password:</label><br />`
-        * [ ] `<input type="password" onChange={event => setPassword(event.target.value)}></input><br /><br />`
-        * [ ] `<button>Submit</button>`
-      * [ ] `</form>`
+  * [x] Build out Login component
+    * [x] In terminal: `npm i jwt-decode`
+    * [x] `import { useState, useContext } from "react";`
+    * [x] `import { useNavigate } from "react-router-dom";`
+    * [x] `import jwtDecode from "jwt-decode";`
+    * [x] `import AuthContext from "./AuthContext";`
+    * [x] const [username, setUsername] = useState("");
+    * [x] const [password, setPassword] = useState("");
+    * [x] const [user, setUser] = useContext(AuthContext);
+    * [x] const navigate = useNavigate();
+    * [x] Build out a form for logging in
+      * [x] `<form onSubmit={submitHandler}>`
+        * [x] `<label>Username:</label><br />`
+        * [x] `<input onChange={event => setUsername(event.target.value)}></input><br /><br />`
+        * [x] `<label>Password:</label><br />`
+        * [x] `<input type="password" onChange={event => setPassword(event.target.value)}></input><br /><br />`
+        * [x] `<button>Submit</button>`
+      * [x] `</form>`
     * Create submit handler for form
-      * [ ] `function submitHandler(event) {`
-        * [ ] `event.preventDefault()`
-        * [ ] `fetch("http://localhost:8080/api/security/login", {`
-          * [ ] `method: "POST",`
-          * [ ] `headers: {`
-            * [ ] `"Content-Type": "application/json"`
-          * [ ] ` },`
-          * [ ] `body: JSON.stringify({`
-            * [ ] `username, password`
-          * [ ] `})`
-        * [ ] `})`
-        * [ ] `.then(response => {`
-          * [ ] `if (response.status === 200) {`
-            * [ ] `const { jwt_token } = await response.json()`
-            * [ ] `localStorage.setItem("token", jwt_token)`
-            * [ ] `setUser({user: jwtDecode(jwt_token)})`
-            * [ ] `navigate("/")`
-          * [ ] `} else {`
-            * [ ] `alert("Something bad");`
-          * [ ] `}`
-        * [ ] `})`
-        * [ ] `.catch(rejection => alert(rejection))`
-      * [ ] `}`
+      * [x] `function submitHandler(event) {`
+        * [x] `event.preventDefault()`
+        * [x] `fetch("http://localhost:8080/api/security/login", {`
+          * [x] `method: "POST",`
+          * [x] `headers: {`
+            * [x] `"Content-Type": "application/json"`
+          * [x] ` },`
+          * [x] `body: JSON.stringify({`
+            * [x] `username, password`
+          * [x] `})`
+        * [x] `})`
+        * [x] `.then(response => {`
+          * [x] `if (response.status === 200) {`
+            * [x] `const { jwt_token } = await response.json()`
+            * [x] `localStorage.setItem("token", jwt_token)`
+            * [x] `setUser({user: jwtDecode(jwt_token)})`
+            * [x] `navigate("/")`
+          * [x] `} else {`
+            * [x] `alert("Something bad");`
+          * [x] `}`
+        * [x] `})`
+        * [x] `.catch(rejection => alert(rejection))`
+      * [x] `}`
+    * [x] Update App.js with new Login route
+      * [x] `import Login from "./Login";`
+      * [x] `<Route path="/login" element={<Login />} />`
+    * [x] Update Nav.js with new Login link
+      * [x] `import { useContext } from 'react';`
+      * [x] `import AuthContext from './AuthContext';`
+      * [x] `const [userStatus, setUserStatus] = useContext(AuthContext);`
   

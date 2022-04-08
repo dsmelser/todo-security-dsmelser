@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import AuthContext from "./AuthContext";
 import Home from "./Home";
 import Nav from "./Nav";
+import Login from "./Login";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Nav />
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </AuthContext.Provider>
