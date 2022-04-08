@@ -15,10 +15,10 @@
 
 ## User Stories
 
-As a __________, I should [not] be able to ____________.
+    As a __________, I should [not] be able to ____________.
 
-Preconditions: what must be true for the user story to be relevant.
-Postconditions: what must be true after the user story ends.
+    Preconditions: what must be true for the user story to be relevant.
+    Postconditions: what must be true after the user story ends.
 
 * [ ] As any user, I should be able to see all public Todos.
 * [ ] As a guest, I should not be able to see any private Todos.
@@ -305,4 +305,46 @@ Postconditions: what must be true after the user story ends.
     * [x] alter table todos auto_increment = 1;
     * [x] (copy all inserts from prod)
   * [x] at end of test schema call set_known_good_state();
+
 * [ ] Create React Front-End
+  * [x] From the terminal, inside of your Java application
+    * [x] `npx create-react-app client`
+    * [x] `cd client`
+    * [x] `code .` [optional - open in VSCode]
+  * [x] Delete cruft
+    * [x] ./public/favicon.ico
+    * [x] ./public/logo192.png
+    * [x] ./public/logo512.png
+    * [x] ./public/manifest.json
+    * [x] ./public/robots.txt
+    * [x] ./src/App.css
+    * [x] ./src/App.test.js
+    * [x] ./src/logo.svg
+    * [x] ./src/reportWebVitals.js
+    * [x] ./src/setupTests.js
+    * [x] Update ./public/index.html
+      * [x] From default file, delete:
+        * [x] Lines 4-26
+        * [x] Change Title to `Todo App`
+        * [x] Delete any additional comments here
+    * [x] Update ./src/App.js
+      * [x] From default file, delete:
+        * [x] Lines 7-20
+        * [x] Lines 1-2
+    * [x] Update ./src/index.css\
+      * [x] Trashcan it all
+     * [x] Update ./src/index.js
+      * [x] From default file, delete:
+        * [x] Lines 14-17
+        * [x] Lines 5
+  * [x] Add additional dependencies
+    * [x] `npm i react-router-dom `
+  * [ ] Create components
+    * [ ] Nav Component
+    * [ ] Login Component
+    * [ ] Home Component - welcoming and showing all pub todos
+      * [ ] Welcome Component - nested inside Home
+      * [ ] Todos (container) Component
+        * [ ] Todo Component
+        * [ ] Delete Component
+    * [ ] AddTodo Component
