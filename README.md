@@ -398,17 +398,32 @@
           * [x] `.then(todosData => setPubTodos(todosData))`
           * [x] `.catch(rejection => alert("Failure: " + rejection.status))`
       * [x] `}, [])`
-    * [ ] `import Todo from './Todo'`
-    * [ ] Implement a `<Todo />` factory function
-      * [ ] `function todoFactory() {`
-        * [ ] `return pubTodos.map(todo => <Todo todoObj={todo} />);` 
+    * [x] `import Todo from './Todo'`
+    * [x] Implement a `<Todo />` factory function
+      * [x] `function todoFactory() {`
+        * [x] `return pubTodos.map(todo => <Todo key={todo.todoId} todoObj={todo} />);` 
+      * [x] `}`
+      * [x] Call function inside of the return for `<Todos />`
+        * [x] `return (`
+          * [x] `<>`
+            * [x] `{todoFactory()}`
+          * [x] `</>`
+        * [x] `)`
+    * [x] Build out the base `<Todo />` component
+      * [x] Functional component, don't forget to export
+    * [x] Use `props.todoObj` to access the todo and display in Todo.js
+      * [x] Destructure the properties of my todoObj into variables
+        * [x] const { text, userId, createDate } = props.todoObj;
+        * [x] Build HTML/JSX structure to display data to return
+          * [x] `<div className="todo-item">`
+            * [x] `<h3>User Id: {userId}</h3>`
+            * [x] `<p>Created: {createDate}</p>`
+            * [x] `<p>Text: {text}</p>`
+          * [x] `</div>`
+    * [ ] Update index.css with Dev-CSS to help visualize
+      * [ ] `.todo-item { `
+        * [ ] `border: 1px black solid;`
+        * [ ] `padding: 20px;`
+        * [ ] `margin-bottom: 30px;`
       * [ ] `}`
-      * [ ] Call function inside of the return for `<Todos />`
-        * [ ] `return (`
-          * [ ] `<>`
-            * [ ] `{todoFactory()}`
-          * [ ] `</>`
-        * [ ] `)`
-    * [ ] Build out the base `<Todo />` component
-      * [ ] Functional component, don't forget to export
   

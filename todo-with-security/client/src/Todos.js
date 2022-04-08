@@ -18,7 +18,7 @@ function Todos() {
     }, []);
 
     function todoFactory() {
-        return pubTodos.map(todo => <Todo todoObj={todo} />);
+        return pubTodos.map(todo => <Todo key={todo.todoId} todoObj={todo} />);
     }
 
     return (
