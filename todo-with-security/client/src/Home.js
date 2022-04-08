@@ -1,10 +1,11 @@
 import Welcome from "./Welcome";
+import Todos from "./Todos";
 
 function Home() {
     return (
         <>
-            <p>This is the Home Component!</p>
             <Welcome />
+            <Todos />
         </>
     )
 }

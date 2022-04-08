@@ -372,9 +372,30 @@
       * [x] `<Route path="/" element={<Home />} />`
       * [x] `// ^^ Home Page Route, at base dot-com URL`
     * [x] `</Routes>`
-  * [ ] Begin implementing Links in Nav.js
-    * [ ] `import { Link } from 'react-router-dom';`
-    * [ ] `<Link to="/">Home</Link>`
-    
- 
+  * [x] Begin implementing Links in Nav.js
+    * [x] `import { Link } from 'react-router-dom';`
+    * [x] `<Link to="/">Home</Link>`
+  * [x] Add `<Todos />` component to Home.js
+    * [x] `import Todos from "./Todos";`
+  * [ ] In Todos.js...
+    * [ ] Create State to store public todos
+      * [ ] `import { useState } from 'react';`
+        * [ ] `const [pubTodos, setPubTodos] = useState([]);`
+    * [ ] Implement `useEffect()` hook for setting state on fetch
+      * [ ] `import { useState, useEffect } from 'react';`
+      * [ ] `useEffect(() => {`
+        * [ ] Use Fetch API to retrieve our public todos
+          * [ ] Verify CORS is open in your TodoController (Java)
+            * [ ] `@CrossOrigin(origins = {"http://localhost:3000"})`
+          * [ ] `fetch("http://localhost:8080/api/todo/public")`
+          * [ ] `.then(response => {`
+              * [ ] `if (response.status === 200) {`
+                * [ ] `return response.json() `
+              * [ ] `} else {`
+                * [ ] `alert("Something went wrong when fetching")`
+              * [ ] `}`
+          * [ ] `})`
+          * [ ] `.then(todosData => setPubTodos(todosData))`
+          * [ ] `.catch(rejection => alert("Failure: " + rejection.status))`
+      * [ ] `}, [])`
   
