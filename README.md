@@ -420,10 +420,66 @@
             * [x] `<p>Created: {createDate}</p>`
             * [x] `<p>Text: {text}</p>`
           * [x] `</div>`
-    * [ ] Update index.css with Dev-CSS to help visualize
-      * [ ] `.todo-item { `
-        * [ ] `border: 1px black solid;`
-        * [ ] `padding: 20px;`
-        * [ ] `margin-bottom: 30px;`
+    * [x] Update index.css with Dev-CSS to help visualize
+      * [x] `.todo-item { `
+        * [x] `border: 1px black solid;`
+        * [x] `padding: 20px;`
+        * [x] `margin-bottom: 30px;`
+      * [x] `}`
+  * [x] Implement useContext hook
+    * [x] Create AuthContext.js
+      * [x] import { createContext } from 'react';
+      * [x] const AuthContext = createContext();
+      * [x] export default AuthContext
+  * [x] In App.js, implement Context
+    * [x] `import { useState } from 'react';`
+    * [x] `import AuthContext from "./AuthContext";`
+    * [x] `const [user, setUser] = useState(null);`
+    * [x] Inside of the return
+      * [x] Before rendering any other components, encapusulate with:
+        * [x] `<AuthContext.Provider value={[user, setUser]}>`
+          * [x] `(everything else you already had here)`
+        * [x] `</AuthContext.Provider>`
+  * [ ] Build out Login component
+    * [ ] In terminal: `npm i jwt-decode`
+    * [ ] `import { useState, useContext } from "react";`
+    * [ ] `import { useNavigate } from "react-router-dom";`
+    * [ ] `import jwtDecode from "jwt-decode";`
+    * [ ] `import AuthContext from "./AuthContext";`
+    * [ ] const [username, setUsername] = useState("");
+    * [ ] const [password, setPassword] = useState("");
+    * [ ] const [user, setUser] = useContext(AuthContext);
+    * [ ] const navigate = useNavigate();
+    * [ ] Build out a form for logging in
+      * [ ] `<form onSubmit={submitHandler}>`
+        * [ ] `<label>Username:</label><br />`
+        * [ ] `<input onChange={event => setUsername(event.target.value)}></input><br /><br />`
+        * [ ] `<label>Password:</label><br />`
+        * [ ] `<input type="password" onChange={event => setPassword(event.target.value)}></input><br /><br />`
+        * [ ] `<button>Submit</button>`
+      * [ ] `</form>`
+    * Create submit handler for form
+      * [ ] `function submitHandler(event) {`
+        * [ ] `event.preventDefault()`
+        * [ ] `fetch("http://localhost:8080/api/security/login", {`
+          * [ ] `method: "POST",`
+          * [ ] `headers: {`
+            * [ ] `"Content-Type": "application/json"`
+          * [ ] ` },`
+          * [ ] `body: JSON.stringify({`
+            * [ ] `username, password`
+          * [ ] `})`
+        * [ ] `})`
+        * [ ] `.then(response => {`
+          * [ ] `if (response.status === 200) {`
+            * [ ] `const { jwt_token } = await response.json()`
+            * [ ] `localStorage.setItem("token", jwt_token)`
+            * [ ] `setUser({user: jwtDecode(jwt_token)})`
+            * [ ] `navigate("/")`
+          * [ ] `} else {`
+            * [ ] `alert("Something bad");`
+          * [ ] `}`
+        * [ ] `})`
+        * [ ] `.catch(rejection => alert(rejection))`
       * [ ] `}`
   
