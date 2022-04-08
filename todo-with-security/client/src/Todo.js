@@ -1,11 +1,21 @@
+import DeleteTodo from "./DeleteTodo"
+import { useContext } from 'react';
+import AuthContext from './AuthContext';
+
 function Todo(props) {
-    const {text, userId, createDate} = props.todoObj;
+    const {text, createDate, username} = props.todoObj;
+    const [user, setUser] = useContext(AuthContext);
 
     return (
         <div className="todo-item">
-            <h3>User Id: {userId}</h3>
+            <h3>User: {username}</h3>
             <p>Created: {createDate}</p>
             <p>Text: {text}</p>
+            { user?.user.sub === username || user?.user.authorities.includes("ROLE_ADMIN") ? (
+                <DeleteTodo />
+            ) : (
+                null
+            ) } 
         </div>
     )
 }
