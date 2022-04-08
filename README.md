@@ -440,6 +440,8 @@
         * [x] `<AuthContext.Provider value={[user, setUser]}>`
           * [x] `(everything else you already had here)`
         * [x] `</AuthContext.Provider>`
+  * [x] Verify CORS is handled in AuthController (Java)
+    * [x] `@CrossOrigin(origins = {"http://localhost:3000"})`
   * [x] Build out Login component
     * [x] In terminal: `npm i jwt-decode`
     * [x] `import { useState, useContext } from "react";`
@@ -472,7 +474,7 @@
         * [x] `})`
         * [x] `.then(response => {`
           * [x] `if (response.status === 200) {`
-            * [x] `const { jwt_token } = await response.json()`
+            * [x] `const { jwt_token } = response.json()`
             * [x] `localStorage.setItem("token", jwt_token)`
             * [x] `setUser({user: jwtDecode(jwt_token)})`
             * [x] `navigate("/")`
@@ -486,7 +488,7 @@
       * [x] `import Login from "./Login";`
       * [x] `<Route path="/login" element={<Login />} />`
     * [x] Update Nav.js with new Login link
-      * [x] `import { useContext } from 'react';`
+      * [x] `import { useConte  xt } from 'react';`
       * [x] `import AuthContext from './AuthContext';`
       * [x] `const [userStatus, setUserStatus] = useContext(AuthContext);`
   

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import AuthContext from './AuthContext';s
+import AuthContext from './AuthContext';
 
 function Nav() {
     const [user, setUser] = useContext(AuthContext);

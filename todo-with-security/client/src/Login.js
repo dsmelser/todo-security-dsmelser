@@ -22,13 +22,18 @@ function Login() {
         })
         .then(response => {
             if (response.status === 200) {
-                const { jwt_token } = await response.json()
-                localStorage.setItem("token", jwt_token)
-                setUser({ user: jwtDecode(jwt_token) })
-                navigate("/")
+                return response.json()
             } else {
                 alert("Something bad");
             }
+        })
+        .then(tokenContainer => {    
+            console.log("tokenContainer: ", tokenContainer)
+            const { jwt_token } = tokenContainer;
+            console.log("jwt_token: ", jwt_token)
+            localStorage.setItem("token", jwt_token);
+            setUser({ user: jwtDecode(jwt_token) });
+            navigate("/");
         })
         .catch(rejection => alert(rejection))
     }
