@@ -17,8 +17,16 @@ function Todos() {
         .catch(rejection => alert("Failure: " + rejection.status + ": " + rejection.statusText));
     }, []);
 
+    function removeTodoFromState(todoId) {
+        setPubTodos(pubTodos.filter(todo => todo.todoId !== todoId));
+    }
+
     function todoFactory() {
-        return pubTodos.map(todo => <Todo key={todo.todoId} todoObj={todo} />);
+        return pubTodos.map(todo => <Todo 
+            key={todo.todoId} 
+            todoObj={todo} 
+            removeFromState={removeTodoFromState} 
+        />);
     }
 
     return (

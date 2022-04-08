@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import AuthContext from './AuthContext';
 
 function Todo(props) {
-    const {text, createDate, username} = props.todoObj;
+    const {todoId, text, createDate, username} = props.todoObj;
     const [user, setUser] = useContext(AuthContext);
 
     return (
@@ -12,7 +12,7 @@ function Todo(props) {
             <p>Created: {createDate}</p>
             <p>Text: {text}</p>
             { user?.user.sub === username || user?.user.authorities.includes("ROLE_ADMIN") ? (
-                <DeleteTodo />
+                <DeleteTodo todoId={todoId} removeFromState={props.removeFromState} />
             ) : (
                 null
             ) } 
