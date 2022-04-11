@@ -25,6 +25,17 @@ public class UserDbRepo implements UserRepo {
                 username).stream().findAny().orElse(null);
     }
 
+    @Override
+    public AppUser findById(Integer userId) {
+        String sql = "select userId, username, password from users where userId = ?";
+
+        return template.query(
+                sql,
+                new UserMapper(findRolesById(userId)),
+                userId).stream().findAny().orElse(null);
+    }
+
+
     private Set<String> findRolesByUsername(String username ){
 
         String sql = "SELECT roleName " +
@@ -37,6 +48,20 @@ public class UserDbRepo implements UserRepo {
                 sql,
                 (rowData, rowNum) -> rowData.getString( "roleName"),
                 username).stream().collect(Collectors.toSet());
+    }
+
+
+    private Set<String> findRolesById(Integer userId) {
+        String sql = "SELECT roleName " +
+                "FROM users u " +
+                "inner join userroles ur on ur.userId = u.userId " +
+                "inner join roles r on ur.roleId = r.roleId " +
+                "where u.userId = ?";
+
+        return template.query(
+                sql,
+                (rowData, rowNum) -> rowData.getString( "roleName"),
+                userId).stream().collect(Collectors.toSet());
     }
 
     @Override
@@ -53,4 +78,6 @@ public class UserDbRepo implements UserRepo {
     public void edit(AppUser updated) {
         throw new UnsupportedOperationException();
     }
+
+
 }

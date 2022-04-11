@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
+@CrossOrigin( origins = {"http://localhost:3000"})
 public class TodoController {
 
     @Autowired
@@ -20,19 +21,26 @@ public class TodoController {
 
     @GetMapping("/public")
     public ResponseEntity getPublicTodos(){
-        List<Todo> allPublic = service.getPublicTodos();
+        return ResponseEntity.ok( service.getPublicTodos() );
+    }
 
-        return ResponseEntity.ok( allPublic );
+    @GetMapping("/{todoId}")
+    public ResponseEntity getById( @PathVariable Integer todoId, Principal user ) throws InvalidUserException {
+        return ResponseEntity.ok( service.getById( todoId, user ));
+
+    }
+
+    @PutMapping
+    public ResponseEntity edit( @RequestBody Todo edited, Principal user ) throws InvalidUserException {
+        service.edit( edited, user );
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{todoId}")
-    public ResponseEntity deleteById(@PathVariable Integer todoId, Principal user){
-        try {
-            service.deleteById( todoId, user );
-            return ResponseEntity.ok().build();
-        } catch (InvalidUserException e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN);
-        }
+    public ResponseEntity deleteById(@PathVariable Integer todoId, Principal user) throws InvalidUserException {
+        service.deleteById( todoId, user );
+        return ResponseEntity.ok().build();
     }
 
 }

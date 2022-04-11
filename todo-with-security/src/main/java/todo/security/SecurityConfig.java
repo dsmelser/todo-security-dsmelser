@@ -30,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.POST, "/api/security/login").permitAll()
                 .antMatchers( HttpMethod.GET, "/api/todo/public").permitAll()
                 .antMatchers( HttpMethod.DELETE, "/api/todo/*").hasAnyRole("AUTHOR", "ADMIN")
+                .antMatchers( HttpMethod.GET, "/api/todo/*" ).authenticated()
+                .antMatchers( HttpMethod.PUT, "/api/todo").authenticated()
                 .antMatchers("/**").denyAll()
 
                 .and()

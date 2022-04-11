@@ -14,7 +14,9 @@ function Todos() {
             }
         })
         .then(todosData => setPubTodos(todosData))
-        .catch(rejection => alert("Failure: " + rejection.status + ": " + rejection.statusText));
+        .catch(rejection => {
+            alert("Failure: " + rejection.status + ": " + rejection.statusText)
+        });
     }, []);
 
     function removeTodoFromState(todoId) {

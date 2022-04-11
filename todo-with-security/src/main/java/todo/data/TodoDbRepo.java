@@ -45,6 +45,13 @@ public class TodoDbRepo implements TodoRepo {
 
     @Override
     public void edit(Todo updated) {
-        throw new UnsupportedOperationException();
+        template.update( "update todos\n" +
+                "set todoText = ?, createDate = ?, isPublic = ?\n" +
+                "where todoId = ?;",
+                updated.getText(),
+                updated.getCreateDate(),
+                updated.getPublic(),
+                updated.getTodoId()
+                );
     }
 }

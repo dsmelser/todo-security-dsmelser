@@ -12,4 +12,5 @@ public interface UserRepo {
 
     void edit( AppUser updated );
 
+    AppUser findById(Integer userId);
 }

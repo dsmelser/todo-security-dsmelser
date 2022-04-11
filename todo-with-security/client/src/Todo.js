@@ -1,6 +1,7 @@
 import DeleteTodo from "./DeleteTodo"
 import { useContext } from 'react';
 import AuthContext from './AuthContext';
+import {Link} from 'react-router-dom';
 
 function Todo(props) {
     const {todoId, text, createDate, username} = props.todoObj;
@@ -12,7 +13,9 @@ function Todo(props) {
             <p>Created: {createDate}</p>
             <p>Text: {text}</p>
             { user?.user.sub === username || user?.user.authorities.includes("ROLE_ADMIN") ? (
-                <DeleteTodo todoId={todoId} removeFromState={props.removeFromState} />
+                <>
+                <Link to={'/edit/' + todoId} >Edit</Link>
+                <DeleteTodo todoId={todoId} removeFromState={props.removeFromState} /></>
             ) : (
                 null
             ) } 

@@ -5,6 +5,11 @@ import AuthContext from './AuthContext';
 function Nav() {
     const [user, setUser] = useContext(AuthContext);
 
+    function handleLogout(){
+        localStorage.removeItem( "token" );
+        setUser( null );
+    }
+
     return (
         <nav>
             <ul>
@@ -13,7 +18,7 @@ function Nav() {
                 </li>
 
                 {user?.user ? (
-                    <li>Logout {user.user.sub}</li>
+                    <li><button onClick={handleLogout}>Logout {user.user.sub}</button></li>
                     // Update with real link later
                 ) : (
                     <li>
