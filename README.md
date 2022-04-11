@@ -15,10 +15,10 @@
 
 ## User Stories
 
-As a __________, I should [not] be able to ____________.
+    As a __________, I should [not] be able to ____________.
 
-Preconditions: what must be true for the user story to be relevant.
-Postconditions: what must be true after the user story ends.
+    Preconditions: what must be true for the user story to be relevant.
+    Postconditions: what must be true after the user story ends.
 
 * [ ] As any user, I should be able to see all public Todos.
 * [ ] As a guest, I should not be able to see any private Todos.
@@ -45,7 +45,7 @@ Postconditions: what must be true after the user story ends.
 
 
 ## Tasks
-
+* [x] Shift+Alt+F is awesome in VSCode
 * [ ] Create Java API
   * [x] Create Java Project (todo-with-security)
   * [x] Modify pom.xml to include the parent tag (spring-boot-starter-parent)
@@ -307,4 +307,190 @@ Postconditions: what must be true after the user story ends.
     * [x] alter table todos auto_increment = 1;
     * [x] (copy all inserts from prod)
   * [x] at end of test schema call set_known_good_state();
+
 * [ ] Create React Front-End
+  * [x] From the terminal, inside of your Java application
+    * [x] `npx create-react-app client`
+    * [x] `cd client`
+    * [x] `code .` [optional - open in VSCode]
+  * [x] Delete cruft
+    * [x] ./public/favicon.ico
+    * [x] ./public/logo192.png
+    * [x] ./public/logo512.png
+    * [x] ./public/manifest.json
+    * [x] ./public/robots.txt
+    * [x] ./src/App.css
+    * [x] ./src/App.test.js
+    * [x] ./src/logo.svg
+    * [x] ./src/reportWebVitals.js
+    * [x] ./src/setupTests.js
+    * [x] Update ./public/index.html
+      * [x] From default file, delete:
+        * [x] Lines 4-26
+        * [x] Change Title to `Todo App`
+        * [x] Delete any additional comments here
+    * [x] Update ./src/App.js
+      * [x] From default file, delete:
+        * [x] Lines 7-20
+        * [x] Lines 1-2
+    * [x] Update ./src/index.css\
+      * [x] Trashcan it all
+     * [x] Update ./src/index.js
+      * [x] From default file, delete:
+        * [x] Lines 14-17
+        * [x] Lines 5
+  * [x] Add additional dependencies
+    * [x] `npm i react-router-dom `
+  * [x] Create components (indents below indicate parent-child relations)
+    * [x] Nav Component
+    * [x] Login Component
+    * [x] Home Component - welcoming and showing all pub todos
+      * [x] Welcome Component - nested inside Home
+      * [x] Todos (container) Component
+        * [x] Todo Component
+        * [x] Delete Component
+    * [x] AddTodo Component
+  * [x] Add react-router to our project
+    * [x] At the top of index.js
+      * [x] `import { BrowserRouter } from 'react-router-dom';`
+      * [x] Change `<React.StrictMode>` to `<BrowserRouter>`
+      * [x] Change `</React.StrictMode>` to `</BrowserRouter>`
+  * [x] Build out base Home component
+    * [x] Functional component, don't forget to export!
+  * [x] Build out base Welcome component
+    * [x] Functional component, don't forget to export!
+  * [x] Add `<Home />` to App.js
+    * [x] `import Home from "./Home";`
+    * [x] Add flavor-text to ground ourselves
+  * [x] Add `<Welcome />` to Home.js
+    * [x] `import Welcome from "./Welcome";`
+    * [x] Add flavor-text to ground ourselves
+  * [x] Add `<Nav />` to App.js
+    * [x] `import Nav from "./Nav";`
+    * [x] Add flavor-text to ground ourselves
+  * [x] Begin implementing Routes in App.js
+    * [x] `import { Routes, Route } from 'react-router-dom';`
+    * [x] `<Routes>`
+      * [x] `<Route path="/" element={<Home />} />`
+      * [x] `// ^^ Home Page Route, at base dot-com URL`
+    * [x] `</Routes>`
+  * [x] Begin implementing Links in Nav.js
+    * [x] `import { Link } from 'react-router-dom';`
+    * [x] `<Link to="/">Home</Link>`
+  * [x] Add `<Todos />` component to Home.js
+    * [x] `import Todos from "./Todos";`
+  * [ ] In Todos.js...
+    * [x] Create State to store public todos
+      * [x] `import { useState } from 'react';`
+        * [x] `const [pubTodos, setPubTodos] = useState([]);`
+    * [x] Implement `useEffect()` hook for setting state on fetch
+      * [x] `import { useState, useEffect } from 'react';`
+      * [x] `useEffect(() => {`
+        * [x] Use Fetch API to retrieve our public todos
+          * [x] Verify CORS is open in your TodoController (Java)
+            * [x] `@CrossOrigin(origins = {"http://localhost:3000"})`
+          * [x] `fetch("http://localhost:8080/api/todo/public")`
+          * [x] `.then(response => {`
+              * [x] `if (response.status === 200) {`
+                * [x] `return response.json() `
+              * [x] `} else {`
+                * [x] `alert("Something went wrong when fetching")`
+              * [x] `}`
+          * [x] `})`
+          * [x] `.then(todosData => setPubTodos(todosData))`
+          * [x] `.catch(rejection => alert("Failure: " + rejection.status))`
+      * [x] `}, [])`
+    * [x] `import Todo from './Todo'`
+    * [x] Implement a `<Todo />` factory function
+      * [x] `function todoFactory() {`
+        * [x] `return pubTodos.map(todo => <Todo key={todo.todoId} todoObj={todo} />);` 
+      * [x] `}`
+      * [x] Call function inside of the return for `<Todos />`
+        * [x] `return (`
+          * [x] `<>`
+            * [x] `{todoFactory()}`
+          * [x] `</>`
+        * [x] `)`
+    * [x] Build out the base `<Todo />` component
+      * [x] Functional component, don't forget to export
+    * [x] Use `props.todoObj` to access the todo and display in Todo.js
+      * [x] Destructure the properties of my todoObj into variables
+        * [x] const { text, userId, createDate } = props.todoObj;
+        * [x] Build HTML/JSX structure to display data to return
+          * [x] `<div className="todo-item">`
+            * [x] `<h3>User Id: {userId}</h3>`
+            * [x] `<p>Created: {createDate}</p>`
+            * [x] `<p>Text: {text}</p>`
+          * [x] `</div>`
+    * [x] Update index.css with Dev-CSS to help visualize
+      * [x] `.todo-item { `
+        * [x] `border: 1px black solid;`
+        * [x] `padding: 20px;`
+        * [x] `margin-bottom: 30px;`
+      * [x] `}`
+  * [x] Implement useContext hook
+    * [x] Create AuthContext.js
+      * [x] import { createContext } from 'react';
+      * [x] const AuthContext = createContext();
+      * [x] export default AuthContext
+  * [x] In App.js, implement Context
+    * [x] `import { useState } from 'react';`
+    * [x] `import AuthContext from "./AuthContext";`
+    * [x] `const [user, setUser] = useState(null);`
+    * [x] Inside of the return
+      * [x] Before rendering any other components, encapusulate with:
+        * [x] `<AuthContext.Provider value={[user, setUser]}>`
+          * [x] `(everything else you already had here)`
+        * [x] `</AuthContext.Provider>`
+  * [x] Verify CORS is handled in AuthController (Java)
+    * [x] `@CrossOrigin(origins = {"http://localhost:3000"})`
+  * [x] Build out Login component
+    * [x] In terminal: `npm i jwt-decode`
+    * [x] `import { useState, useContext } from "react";`
+    * [x] `import { useNavigate } from "react-router-dom";`
+    * [x] `import jwtDecode from "jwt-decode";`
+    * [x] `import AuthContext from "./AuthContext";`
+    * [x] const [username, setUsername] = useState("");
+    * [x] const [password, setPassword] = useState("");
+    * [x] const [user, setUser] = useContext(AuthContext);
+    * [x] const navigate = useNavigate();
+    * [x] Build out a form for logging in
+      * [x] `<form onSubmit={submitHandler}>`
+        * [x] `<label>Username:</label><br />`
+        * [x] `<input onChange={event => setUsername(event.target.value)}></input><br /><br />`
+        * [x] `<label>Password:</label><br />`
+        * [x] `<input type="password" onChange={event => setPassword(event.target.value)}></input><br /><br />`
+        * [x] `<button>Submit</button>`
+      * [x] `</form>`
+    * Create submit handler for form
+      * [x] `function submitHandler(event) {`
+        * [x] `event.preventDefault()`
+        * [x] `fetch("http://localhost:8080/api/security/login", {`
+          * [x] `method: "POST",`
+          * [x] `headers: {`
+            * [x] `"Content-Type": "application/json"`
+          * [x] ` },`
+          * [x] `body: JSON.stringify({`
+            * [x] `username, password`
+          * [x] `})`
+        * [x] `})`
+        * [x] `.then(response => {`
+          * [x] `if (response.status === 200) {`
+            * [x] `const { jwt_token } = response.json()`
+            * [x] `localStorage.setItem("token", jwt_token)`
+            * [x] `setUser({user: jwtDecode(jwt_token)})`
+            * [x] `navigate("/")`
+          * [x] `} else {`
+            * [x] `alert("Something bad");`
+          * [x] `}`
+        * [x] `})`
+        * [x] `.catch(rejection => alert(rejection))`
+      * [x] `}`
+    * [x] Update App.js with new Login route
+      * [x] `import Login from "./Login";`
+      * [x] `<Route path="/login" element={<Login />} />`
+    * [x] Update Nav.js with new Login link
+      * [x] `import { useConte  xt } from 'react';`
+      * [x] `import AuthContext from './AuthContext';`
+      * [x] `const [userStatus, setUserStatus] = useContext(AuthContext);`
+  
