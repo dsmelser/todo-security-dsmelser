@@ -26,7 +26,11 @@ public class TodoDbRepo implements TodoRepo {
 
     @Override
     public Todo findById(Integer todoId) {
-        return template.query("select * from todos where todoId = ?", new TodoMapper(), todoId).stream().findAny().orElse(null);
+        return template.query(
+                "select * from todos where todoId = ?",
+                new TodoMapper(),
+                todoId)
+                .stream().findAny().orElse(null);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class TodoDbRepo implements TodoRepo {
 
     @Override
     public boolean remove(Integer todoId) {
-        throw new UnsupportedOperationException();
+        return template.update( "delete from todos where todoId = ?", todoId) == 1;
     }
 
     @Override

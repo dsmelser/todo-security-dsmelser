@@ -40,9 +40,5 @@ public class TodoService {
         } else {
             throw new InvalidUserException("Only admins and the author of the todo may delete it.");
         }
-
-
-
-
     }
 }
